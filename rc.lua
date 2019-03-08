@@ -574,7 +574,8 @@ client.connect_signal("request::titlebars", function(c)
 
     awful.titlebar(c) : setup {
         { -- Left
-          awful.titlebar.widget.iconwidget(c),
+		  -- Quito los iconos de app, que son horribles
+          -- awful.titlebar.widget.iconwidget(c),
           buttons = buttons,
           layout  = wibox.layout.fixed.horizontal
         },
@@ -616,14 +617,14 @@ autorunApps =
    "compton -b -c --config /home/isaac/.config/compton/config --backend glx --vsync opengl-swc",
    --Restauro el último wallpaper con nitrogen
    "nitrogen --restore",
-   --Enciendo dropbox con la aplicación python de Bunsenlabs
-   "dropbox.py start",
    --Que aparezca el wifi en el systray
    "nm-applet",
    --Que aparezca el bluetooth en el systray
    "blueman-applet",
    --Que aparezca el volumen, he tenido que instalar volti desde apt
    "volti",
+   --Enciendo dropbox con la aplicación python de Bunsenlabs
+   "sleep 10, dropbox.py start",
 }
 if autorun then
    for app = 1, #autorunApps do
