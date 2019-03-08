@@ -622,9 +622,9 @@ autorunApps =
    --Que aparezca el bluetooth en el systray
    "blueman-applet",
    --Que aparezca el volumen, he tenido que instalar volti desde apt
-   "volti",
+   "volti", 
    --Enciendo dropbox con la aplicación python de Bunsenlabs
-   "sleep 10, dropbox.py start",
+   "dropbox.py start",
 }
 if autorun then
    for app = 1, #autorunApps do
