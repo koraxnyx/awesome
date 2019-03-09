@@ -64,7 +64,7 @@ r_sep = wibox.widget.textbox(" » ")
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+modkey = "Mod1"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -589,10 +589,10 @@ client.connect_signal("request::titlebars", function(c)
         },
         { -- Right
             awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
             awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-	    awful.titlebar.widget.minimizebutton (c),
+            -- awful.titlebar.widget.ontopbutton    (c),
+	        awful.titlebar.widget.minimizebutton (c),
+            awful.titlebar.widget.maximizedbutton(c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
@@ -624,7 +624,7 @@ autorunApps =
    --Que aparezca el volumen, he tenido que instalar volti desde apt
    "volti", 
    --Enciendo dropbox con la aplicación python de Bunsenlabs
-   "dropbox.py start",
+   "dropbox start",
 }
 if autorun then
    for app = 1, #autorunApps do
