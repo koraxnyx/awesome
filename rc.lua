@@ -12,6 +12,9 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Manual. Requerir lain
 local lain = require("lain")
+-- Declaro una nueva systray para arle tamaño adecuado
+local systray = wibox.widget.systray()
+systray.forced_height = 10
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -44,8 +47,8 @@ end
 -- {{{ Variable definitions
 
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/isaac/.config/awesome/themes/default/theme.lua")
-beautiful.useless_gap = 5
+beautiful.init("/home/isaac/.config/awesome/themes/default2/theme.lua")
+beautiful.useless_gap = 4
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -53,7 +56,7 @@ editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Defino separadores
-tbox_separator = wibox.widget.textbox(" | ")
+tbox_separator = wibox.widget.textbox(" ")
 l_sep = wibox.widget.textbox(" « ")
 m_sep = wibox.widget.textbox(" ][ ")
 r_sep = wibox.widget.textbox(" » ")
@@ -134,7 +137,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock(" %H:%M ")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -198,8 +201,47 @@ awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
+awful.tag.add("", {
+    icon               = "/home/isaac/.config/awesome/themes/default2/1.png",
+    layout             = awful.layout.layouts[1],
+    --master_fill_policy = "master_width_factor",
+    --gap_single_client  = true,
+    --gap                = 15,
+    --screen             = s,
+    selected           = true,
+})
+
+awful.tag.add("", {
+    icon = "/home/isaac/.config/awesome/themes/default2/2.png",
+    layout = awful.layout.layouts[1],
+    screen = s,
+})
+
+awful.tag.add("", {
+    icon = "/home/isaac/.config/awesome/themes/default2/3.png",
+    layout = awful.layout.layouts[1],
+    screen = s,
+})
+
+awful.tag.add("", {
+    icon = "/home/isaac/.config/awesome/themes/default2/4.png",
+    layout = awful.layout.layouts[1],
+    screen = s,
+})
+
+awful.tag.add("", {
+    icon = "/home/isaac/.config/awesome/themes/default2/5.png",
+    layout = awful.layout.layouts[1],
+    screen = s,
+})
+
+awful.tag.add("", {
+    icon = "/home/isaac/.config/awesome/themes/default2/6.png",
+    layout = awful.layout.layouts[1],
+    screen = s,
+})
     -- Each screen has its own tag table.
-    awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 " }, s, awful.layout.layouts[1])
+    -- awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 " }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -221,13 +263,13 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({ position = "bottom", screen = s, 
     -- Altura de la wibox 
     fg = beautiful.fg_normal, 
-    height = 28,
-    -- width = 1366,
-    margin = 10,
-    padding = 8,
-    border_color = "#FFFFFF80",--(75%),--beautiful.border_focus,
-    border_width = 0, --beautiful.border_width
-    opacity = 0.85,
+    height = 42,
+    width = 1000,
+    margin = 0,
+    padding = 0,
+    border_color = "#00000000",--(75%),--beautiful.border_focus,
+    border_width = 8, --beautiful.border_width
+    opacity = 0.75,
     })
 
     -- Add widgets to the wibox
@@ -235,8 +277,9 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
-            tbox_separator,
+            --tbox_separator,
+            --mylauncher,
+            --tbox_separator,
             s.mytaglist,
             s.mypromptbox,
             tbox_separator,
@@ -244,14 +287,17 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            --mykeyboardlayout,
             wibox.widget.systray(),
+            --systray(),
             mytextclock,
             s.mylayoutbox,
         },
     }
 end)
 -- }}}
+
+
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
@@ -526,6 +572,14 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = true }
     },
 
+    -- Terminals don't have window decoration
+    { rule = { class = "X-terminal-emulator" },
+    properties = { titlebars_enabled = false } },
+
+    -- Chrome does not have window decoration
+    { rule = { class = "Google-chrome" },
+    properties = { titlebars_enabled = false } },
+
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
@@ -576,6 +630,8 @@ client.connect_signal("request::titlebars", function(c)
         { -- Left
 		  -- Quito los iconos de app, que son horribles
           -- awful.titlebar.widget.iconwidget(c),
+          -- Pongo los que indican si flota o no
+          awful.titlebar.widget.floatingbutton (c),
           buttons = buttons,
           layout  = wibox.layout.fixed.horizontal
         },
@@ -588,7 +644,7 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
+            
             awful.titlebar.widget.stickybutton   (c),
             -- awful.titlebar.widget.ontopbutton    (c),
 	        awful.titlebar.widget.minimizebutton (c),
@@ -625,6 +681,7 @@ autorunApps =
    "volti", 
    --Enciendo dropbox con la aplicación python de Bunsenlabs
    "dropbox start",
+   --"tint2 -c /home/isaac/.config/tint2/horizontal-dark-transparent.tint2rc",
 }
 if autorun then
    for app = 1, #autorunApps do

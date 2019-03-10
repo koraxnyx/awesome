@@ -4,13 +4,13 @@
 
 local theme = {}
 
-theme.font          = "overpass mono 9"
+theme.font          = "Noto Sans Mono CJK TC Regular 9"
 
-theme.bg_normal     = "#222222"
+theme.bg_normal     = "#00000000"
 theme.bg_focus      = "#535d6c"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
-theme.bg_systray    = "#222222" --theme.bg_normal
+theme.bg_systray    = "#00000000" --theme.bg_normal
 
 theme.fg_normal     = "#aaaaaa"
 theme.fg_focus      = "#ffffff"
@@ -18,7 +18,7 @@ theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = 0
-theme.border_width  = 1
+theme.border_width  = 0
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
@@ -32,7 +32,8 @@ theme.border_marked = "#91231c"
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- Example:
---theme.taglist_bg_focus = "#ff0000"
+theme.taglist_bg_focus = "#FFFFFF50"
+theme.tasklist_bg_focus = "#FFFFFF50"
 
 -- Display the taglist squares
 theme.taglist_squares_sel   = "/home/isaac/.config/awesome/themes/default/taglist/squarefw.png"
@@ -44,7 +45,7 @@ theme.taglist_squares_unsel_empty = ""
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = "/home/isaac/.config/awesome/themes/default/submenu.png"
-theme.menu_height = 15
+theme.menu_height = 25
 theme.menu_width  = 100
 
 -- You can add as many variables as
@@ -53,7 +54,7 @@ theme.menu_width  = 100
 --theme.bg_widget = "#cc0000"
 
 -- Define the image to load
-theme.titlebar_close_button_normal = "	titlebar/close_normal.png"
+theme.titlebar_close_button_normal = "/home/isaac/.config/awesome/themes/default/titlebar/close_normal.png"
 theme.titlebar_close_button_focus  = "/home/isaac/.config/awesome/themes/default/titlebar/close_focus.png"
 
 theme.titlebar_minimize_button_normal = "/home/isaac/.config/awesome/themes/default/titlebar/minimize_normal.png"
@@ -99,7 +100,7 @@ theme.layout_cornerne = "/home/isaac/.config/awesome/themes/default/layouts/corn
 theme.layout_cornersw = "/home/isaac/.config/awesome/themes/default/layouts/cornersww.png"
 theme.layout_cornerse = "/home/isaac/.config/awesome/themes/default/layouts/cornersew.png"
 
-theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
+theme.awesome_icon = "/home/isaac/.config/awesome/themes/default/awesome.png"
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
