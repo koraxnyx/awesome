@@ -6,11 +6,11 @@ local theme = {}
 
 theme.font          = "Noto Sans Mono CJK TC Regular 9"
 
-theme.bg_normal     = "#00000000"
+theme.bg_normal     = "#000000"
 theme.bg_focus      = "#535d6c"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
-theme.bg_systray    = "#00000000" --theme.bg_normal
+theme.bg_systray    = "#000000" --theme.bg_normal
 
 theme.fg_normal     = "#aaaaaa"
 theme.fg_focus      = "#ffffff"
@@ -32,8 +32,8 @@ theme.border_marked = "#91231c"
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- Example:
-theme.taglist_bg_focus = "#FFFFFF50"
-theme.tasklist_bg_focus = "#FFFFFF50"
+theme.taglist_bg_focus = "#6B6E78"
+theme.tasklist_bg_focus = "#000000"
 
 -- Display the taglist squares
 theme.taglist_squares_sel   = "/home/isaac/.config/awesome/themes/default2/taglist/squarefw.png"

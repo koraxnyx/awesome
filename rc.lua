@@ -12,9 +12,6 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Manual. Requerir lain
 local lain = require("lain")
--- Declaro una nueva systray para arle tamaño adecuado
-local systray = wibox.widget.systray()
-systray.forced_height = 10
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -263,12 +260,12 @@ awful.tag.add("", {
     s.mywibox = awful.wibar({ position = "bottom", screen = s, 
     -- Altura de la wibox 
     fg = beautiful.fg_normal, 
-    height = 42,
-    width = 1000,
+    height =28,
+    --width = 1000,
     margin = 0,
     padding = 0,
     border_color = "#00000000",--(75%),--beautiful.border_focus,
-    border_width = 8, --beautiful.border_width
+    border_width = 0, --beautiful.border_width
     opacity = 0.75,
     })
 
@@ -309,6 +306,17 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
+    --Rename tag on the fly
+    awful.key({ modkey, "Shift",  }, "F2",
+              function ()
+                    awful.prompt.run {
+                      prompt       = "Inserta nombre: ",
+                      text         = awful.tag.selected().name,
+                      textbox      = awful.screen.focused().mypromptbox.widget,
+                      exe_callback = function (s) awful.tag.selected().name = s end,
+                  }
+            end,
+            {description = "rename tag", group = "awesome"}),
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey, "Control" }, "Left",   awful.tag.viewprev,
